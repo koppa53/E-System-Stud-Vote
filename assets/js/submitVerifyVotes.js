@@ -78,6 +78,7 @@ $(document).ready(function () {
         if (id.length == 0) {
             Swal.fire({
                 icon: "error",
+                allowOutsideClick: false,
                 title: "Please Enter Student ID"
             })
         } else {
@@ -111,13 +112,15 @@ $(document).ready(function () {
         if (verifiedStudent == 0) {
             Swal.fire({
                 icon: "error",
-                title: "Please Validate Student Before Verifying or Submitting Votes."
+                title: "Please Validate Student Before Verifying or Submitting Votes.",
+                allowOutsideClick: false,
             })
             return;
         }
         if (verifiedStudent == 2) {
             Swal.fire({
                 icon: "error",
+                allowOutsideClick: false,
                 title: "Cant Submit Vote has Student Already Voted."
             })
             return;
@@ -125,6 +128,7 @@ $(document).ready(function () {
         if ($('#USCBALLOT input:checked').length == 0 && $('#CSCBALLOT input:checked').length == 0) {
             Swal.fire({
                 icon: "error",
+                allowOutsideClick: false,
                 title: "No candidates selected."
             })
             return;
@@ -132,6 +136,7 @@ $(document).ready(function () {
         if ($('#USCBALLOT input:checked').length == 0) {
             Swal.fire({
                 icon: "error",
+                allowOutsideClick: false,
                 title: "No USC candidates selected."
             })
             return;
@@ -139,6 +144,7 @@ $(document).ready(function () {
         if ($('#CSCBALLOT input:checked').length == 0) {
             Swal.fire({
                 icon: "error",
+                allowOutsideClick: false,
                 title: "No CSC candidates selected."
             })
             return;
@@ -286,8 +292,9 @@ $(document).ready(function () {
             generateReciept()
             Swal.fire({
                 icon: "success",
-                title: "Votes Successfully Submitted.",
-                text: "You will be logout for next voter...",
+                title: "Votes Successfully Submitted",
+                allowOutsideClick: false,
+                text: "Thank You For Voting.",
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Done'
             }).then((result) => {
