@@ -349,7 +349,7 @@ $(document).ready(function () {
 
         doc.setFont('Helvetica', 'normal')
         doc.setFontSize(18);
-        const stid = "Student ID: " + verifiedStudentID
+        const stid = "Student ID: " + verifiedStudentID.toUpperCase()
         var textWidth = doc.getStringUnitWidth(stid) * doc.internal.getFontSize() / doc.internal.scaleFactor;
         var textOffset = (doc.internal.pageSize.width - textWidth) / 2;
         doc.text(textOffset, 85, stid);

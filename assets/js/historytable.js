@@ -21,7 +21,8 @@ $(document).ready(function () {
         ],
         language: {
             loadingRecords: `<div class="spinner-border text-secondary" role="status"></div><span>&nbsp&nbspGathering Records...</span>`
-        }
+        },
+
     });
 
 })

@@ -1,11 +1,10 @@
 $(document).ready(function () {
 
-    window.onload = someFunction;
+    window.onload = loadCandidate;
     var college = sessionStorage.getItem("College")
-    async function someFunction() {
+    async function loadCandidate() {
         try {
             let pos = new Array()
-            let poscsc = new Array()
             const [data1, data2, data3, data4] = await Promise.all([
                 fetch('http://localhost:5000/all_active_USC_position').then((response) => response.json()),
                 fetch('http://localhost:5000/all_usc_ballot_candidate_on_list').then((response) => response.json()),
@@ -15,10 +14,8 @@ $(document).ready(function () {
             data1.forEach(function (v) {
                 pos.push(v.position_max_vote)
             })
-            data3.forEach(function (v) {
-                poscsc.push(v.position_max_vote)
-            })
             var currentposition = ""
+            var ballotcounter = 0
             var count = 0
             var rowCount = 0;
             data2.forEach(function (v) {
@@ -96,15 +93,33 @@ $(document).ready(function () {
                     );
                     count++;
                 }
+                if (data2.length - 1 == ballotcounter) {
+                    $("#" + rowCount).append(
+                        `
+                        <div class="col">
+                            <br>
+                            <br>
+                            <input type="radio" id="`+ currentposition + "_usc" + `" class="radio-button" value="ABSTAINED_ABSTAINED_` + currentposition + "_-2_USC_" + v.usc_ballot_election_year + `" onclick="disableCandidates(` + rowCount + `)">
+                            <label for="`+ currentposition + `"><b>ABSTAIN</b></label>
+                        </div>
+                        </div>
+                        <hr class="divider">
+                    `
+                    )
+                }
+                ballotcounter++;
             })
-
             var csccurrentposition = ""
             var csccount = 0
-            var cscrowCount = 10;
+            var cscrowCount = 100;
             var cscballotcounter = 0
+            let poscsc = new Array()
+            data3.forEach(function (v) {
+                poscsc.push(v.position_max_vote)
+            })
             data4.forEach(function (v) {
                 if (csccurrentposition != v.csc_candidate_position) {
-                    if (cscrowCount != 0) {
+                    if (cscrowCount != 100) {
                         $("#" + cscrowCount).append(
                             `
                             <div class="col">
@@ -134,7 +149,7 @@ $(document).ready(function () {
                         <form>
                         <div class="box-header with-border">
                             <h4 class="box-title"><b>CSC `+ csccurrentposition + `</b></h4>
-                            <p> Please select only <b>`+ poscsc[cscrowCount - 11] + ` candidate</b>:
+                            <p> Please select only <b>`+ poscsc[cscrowCount - 101] + ` candidate</b>:
                             <button type="reset" class="btn btn-sm btn-outline-danger" value="reset" onclick="enableCandidates(`+ cscrowCount + `)"><i class="fa fa-refresh"></i> Reset</button>
                             </p> 
                         </div>
@@ -183,7 +198,7 @@ $(document).ready(function () {
                         <div class="col">
                             <br>
                             <br>
-                            <input type="radio" id="`+ csccurrentposition + "_csc" + `" class="radio-button" value="ABSTAINED_ABSTAINED_` + currentposition + "_-2_CSC_" + v.csc_ballot_election_year + `" onclick="disableCandidates(` + cscrowCount + `)">
+                            <input type="radio" id="`+ csccurrentposition + "_csc" + `" class="radio-button" value="ABSTAINED_ABSTAINED_` + csccurrentposition + "_-2_CSC_" + v.csc_ballot_election_year + `" onclick="disableCandidates(` + cscrowCount + `)">
                             <label for="`+ csccurrentposition + `"><b>ABSTAIN</b></label>
                         </div>
                         </div>
@@ -194,8 +209,10 @@ $(document).ready(function () {
                 cscballotcounter++;
             })
 
+
         } catch (err) {
             console.log(err);
         }
     }
+
 })
