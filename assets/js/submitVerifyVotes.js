@@ -1,31 +1,17 @@
 $(document).ready(function () {
 
     let pos = new Array()
-    allactivePositions()
-    async function allactivePositions() {
-        const response = await fetch('http://localhost:5000/all_active_USC_position', {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        data.forEach(function (v) {
+    let poscsc = new Array()
+    loadPositions()
+    async function loadPositions() {
+        const [dat1, dat2] = await Promise.all([
+            fetch('http://localhost:5000/all_active_USC_position').then((response) => response.json()),
+            fetch('http://localhost:5000/all_active_CSC_position').then((response) => response.json()),
+        ]);
+        dat1.forEach(function (v) {
             pos.push(v.position_max_vote)
         })
-    }
-
-    let poscsc = new Array()
-    allactivePositionscsc()
-    async function allactivePositionscsc() {
-        const response = await fetch('http://localhost:5000/all_active_CSC_position', {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        data.forEach(function (v) {
+        dat2.forEach(function (v) {
             poscsc.push(v.position_max_vote)
         })
     }
@@ -42,7 +28,12 @@ $(document).ready(function () {
 
         for (var i = 0; i < a.length; ++i) {
             if (a[i] != "pass") {
-                if (a[i] !== b[i]) return false;
+                if (b[i] > 1) {
+                    if (a[i] == 0) return false;
+                    if (a[i] > b[i]) return false;
+                } else {
+                    if (a[i] !== b[i]) return false;
+                }
             }
         }
         return true;

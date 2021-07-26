@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    window.onload = loadCandidate;
-    var college = sessionStorage.getItem("College")
+    window.onload = loadCandidate();
     async function loadCandidate() {
+        var college = sessionStorage.getItem("College")
         try {
             let pos = new Array()
             const [data1, data2, data3, data4] = await Promise.all([
@@ -50,7 +50,7 @@ $(document).ready(function () {
                         <form>
                         <div class="box-header with-border">
                             <h4 class="box-title"><b>USC `+ currentposition + `</b></h4>
-                            <p> Please select only <b>`+ pos[rowCount - 1] + ` candidate</b>:
+                            <p> Please select up to <b>`+ pos[rowCount - 1] + ` candidate/s</b>:
                             <button type="reset" class="btn btn-sm btn-outline-danger" value="reset" onclick="enableCandidates(`+ rowCount + `)"><i class="fa fa-refresh"></i> Reset</button>
                             </p> 
                         </div>
@@ -149,7 +149,7 @@ $(document).ready(function () {
                         <form>
                         <div class="box-header with-border">
                             <h4 class="box-title"><b>CSC `+ csccurrentposition + `</b></h4>
-                            <p> Please select only <b>`+ poscsc[cscrowCount - 101] + ` candidate</b>:
+                            <p> Please select up to <b>`+ poscsc[cscrowCount - 101] + ` candidate/s</b>:
                             <button type="reset" class="btn btn-sm btn-outline-danger" value="reset" onclick="enableCandidates(`+ cscrowCount + `)"><i class="fa fa-refresh"></i> Reset</button>
                             </p> 
                         </div>
