@@ -11,51 +11,86 @@
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="stylesheet" href="assets/css/pages/auth.css">
     <link rel="stylesheet" href="assets/css/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
     <link rel="shortcut icon" href="assets/images/logo/bu.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/clock.css">
 </head>
 
-<style>
-body {
-background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5) ), url("assets/images/bg/BicolU.jpg");
-background-size:cover;
-}
-</style>
-
 <body>
-    <div id="auth">
-        <div class="row h-100">
-            <div class="col-lg-7 col-12">
-                <div id="auth-left">
-                    <div class="auth-logo">
-                        <img src="assets\images\logo\BU.gif" style="height:200px; width:200px;"  alt="Logo">
-                    </div>
-                    <h5 class="auth-title" style= "color:black;">USC | CSC Assisted<br>Voting System</h5>
-                    <p class="auth-subtitle mb-5;" style= "color:black" >Login</p>
-                    <form action="javascript:login()" >
-                        <div class="form-group position-relative has-icon-left mb-4 w-75">
-                            <input type="text" class="form-control form-control-xl" placeholder="Username" id="username">
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
-                            </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left w-75">
-                            <input type="password" class="form-control form-control-xl"  placeholder="Password" id="password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
-                        <input class="btn btn-primary btn-block btn-lg shadow-lg mt-2 w-75" style = "background-color:#009bde;" type="submit" value="Login">
-                    </form>
+        <div class="card shadow d-flex align-items-center justify-content-center">
+            <div class="card-content ">
+                <div class="card-header">
+                    <h4 class="card-title">Bicol University USC | CSC Online Voting</h4>
                 </div>
-            </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h5>Election Countdown Clock</h5>
+                        <div id="clockdiv">
+                            <div>
+                                <span class="days"></span>
+                                <div class="smalltext">Days</div>
+                            </div>
+                            <div>
+                                <span class="hours"></span>
+                                <div class="smalltext">Hours</div>
+                            </div>
+                            <div>
+                                <span class="minutes"></span>
+                                <div class="smalltext">Minutes</div>
+                            </div>
+                            <div>
+                                <span class="seconds"></span>
+                                <div class="smalltext">Seconds</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#inlineForm">
+                            Enter
+                        </button>
+
+                        <!--login form Modal -->
+                        <div class="modal fade text-left" id="inlineForm" tabindex="-1"
+                            role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-light">
+                                        <h4 class="modal-title" id="myModalLabel33"  style="color:black">Enter Your Student ID And College </h4>
+                                    </div>
+                                    <form method="POST" action = "" id="verifyID">
+                                        <div class="modal-body">
+                                            <label>Student ID </label>
+                                                <input type="text" placeholder="Student ID"
+                                                    class="form-control" id ="studId">
+                                            <label>College </label>
+                                            <select class="form-select" id="colleges">
+                                                <option value=""selected disabled>Select College</option>
+                                                <option value="College of Science">College of Science</option>
+                                                <option value="College of Arts and Letters">College of Arts and Letters</option>
+                                                <option value="College of Education">College of Education</option>
+                                                <option value="College of Nursing">College of Nursing</option>
+                                                <option value="College of Education">College of Education</option>
+                                                <option value="College of Engineering">College of Engineering</option>
+                                                <option value="College of Social Science and Philosophy">College of Social Science and Philosophy</option>
+                                                <option value="College of Business, Economics and Management">College of Business, Economics and Management</option>
+                                                <option value="College of Agriculture and Forestry">College of Agriculture and Forestry</option>
+                                                <option value="IPESR">IPESR</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input class="btn btn-light-secondary ml-1" type="button" data-bs-dismiss="modal" value="Close">
+                                            <input class="btn btn-primary ml-1" type="submit" value="Verify">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <script src="assets/js/bootstrap.bundle.min.js"></script> 
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/auth-login.js"></script>
     <script src="assets/js/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>

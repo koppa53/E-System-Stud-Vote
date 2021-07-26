@@ -61,61 +61,9 @@ $(document).ready(function () {
         return [a, b];
     }
 
-    let verifiedStudent = 0
-    let verifiedStudentID = ""
-    $('#verifyStudent').click(async (event) => {
-        event.preventDefault();
-        const id = $('#studid').val()
-        if (id.length == 0) {
-            Swal.fire({
-                icon: "error",
-                allowOutsideClick: false,
-                title: "Please Enter Student ID"
-            })
-        } else {
-            const response = await fetch('http://localhost:5000/student_has_voted/' + id, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const data = await response.json();
-            if (response.ok) {
-                Swal.fire({
-                    icon: "success",
-                    title: data.message
-                })
-                verifiedStudent = 1
-                verifiedStudentID = id
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: data.message
-                })
-                verfiiedStudent = 2
-            }
-        }
-    })
-
     let allUSCVotes = new Array()
     let allCSCVotes = new Array()
     $('#verify').click(function () {
-        if (verifiedStudent == 0) {
-            Swal.fire({
-                icon: "error",
-                title: "Please Validate Student Before Verifying or Submitting Votes.",
-                allowOutsideClick: false,
-            })
-            return;
-        }
-        if (verifiedStudent == 2) {
-            Swal.fire({
-                icon: "error",
-                allowOutsideClick: false,
-                title: "Cant Submit Vote has Student Already Voted."
-            })
-            return;
-        }
         if ($('#USCBALLOT input:checked').length == 0 && $('#CSCBALLOT input:checked').length == 0) {
             Swal.fire({
                 icon: "error",
@@ -221,24 +169,21 @@ $(document).ready(function () {
         }
     })
 
+    var id = sessionStorage.getItem("User ID")
     var college = sessionStorage.getItem("College")
-    var firstname = sessionStorage.getItem("First Name")
-    var lastname = sessionStorage.getItem("Last Name")
     $('#submitVotes').on('click', async (event) => {
         event.preventDefault()
         let success = false
         for (const v of allUSCVotes) {
             let split = v.split('_')
-            const response = await fetch('http://localhost:5000/new_assisted_student_vote', {
+            const response = await fetch('http://localhost:5000/new_student_vote', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    vote_student_id: verifiedStudentID,
+                    vote_student_id: id,
                     vote_election_year: split[5],
-                    vote_assistant_first_name: firstname,
-                    vote_assistant_last_name: lastname,
                     vote_candidate_first_name: split[0],
                     vote_candidate_last_name: split[1],
                     vote_candidate_id: split[3],
@@ -255,16 +200,14 @@ $(document).ready(function () {
         }
         for (const v of allCSCVotes) {
             let split = v.split('_')
-            const response = await fetch('http://localhost:5000/new_assisted_student_vote', {
+            const response = await fetch('http://localhost:5000/new_student_vote', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    vote_student_id: verifiedStudentID,
+                    vote_student_id: id,
                     vote_election_year: split[5],
-                    vote_assistant_first_name: firstname,
-                    vote_assistant_last_name: lastname,
                     vote_candidate_first_name: split[0],
                     vote_candidate_last_name: split[1],
                     vote_candidate_id: split[3],
@@ -304,6 +247,7 @@ $(document).ready(function () {
 
     function generateReciept() {
         window.jsPDF = window.jspdf.jsPDF
+        var ids = sessionStorage.getItem("User ID")
         var today = new Date();
         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -340,7 +284,7 @@ $(document).ready(function () {
 
         doc.setFont('Helvetica', 'normal')
         doc.setFontSize(18);
-        const stid = "Student ID: " + verifiedStudentID.toUpperCase()
+        const stid = "Student ID: " + ids.toUpperCase()
         var textWidth = doc.getStringUnitWidth(stid) * doc.internal.getFontSize() / doc.internal.scaleFactor;
         var textOffset = (doc.internal.pageSize.width - textWidth) / 2;
         doc.text(textOffset, 85, stid);
@@ -411,7 +355,7 @@ $(document).ready(function () {
             ycsc += 20
         }
         doc.output('dataurlnewwindow');
-        var docTitle = verifiedStudentID + "-" + today.getFullYear() + " Vote-Reciept"
+        var docTitle = ids.toUpperCase() + "-" + today.getFullYear() + " Vote-Reciept"
         doc.save(docTitle + '.pdf');
     }
 })

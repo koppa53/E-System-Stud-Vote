@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Bicol University Assisted Voting System</title>
+    <title>USC|CSC Voting System</title>
     <link rel="shortcut icon" href="assets/images/logo/bu.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="assets/css/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css">
     <link rel="stylesheet" href="assets/css/app.css">
-    <script src="assets/js/check-auth.js"></script>
+    <!--<script src="assets/js/check-auth.js"></script>-->
 </head>
 
 <body style="padding-top: 50px;">
@@ -33,183 +32,70 @@
                                 <img src="assets/images/logo/OSAS.png" style="width: 90px; height: 90px">
                             </div>
                             <div class="carousel-item text-primary">
-                                <h2>HAVE A NICE DAY!<h2>
+                                <h2>VOTE WISELY!<h2>
                             </div></center>
                         </div>
                     </div> 
                 </div>
                 <div class="card-body">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
-                                role="tab" aria-controls="home" aria-selected="true">Voting Section</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                role="tab" aria-controls="profile" aria-selected="false">History</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
-                                role="tab" aria-controls="contact" aria-selected="false">Options</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel"aria-labelledby="home-tab">
-                            <center>
-                                <div class="col-md-3 col-6" style="width: 70%; margin: 0 auto;">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Student Information:</h4>
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <form class="form form-horizontal">
-                                                    <div class="form-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                Student ID:
-                                                                <input type="text" class="form-control" placeholder="ID" id="studid">
-                                                                <br>
-                                                                <center><button href="#" class="btn btn-outline-warning block rounded-pill"
-                                                                    id="verifyStudent">Verify Student</button></center>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>  
-                                            </div>
+                <!----------------------------------------------------------------USC VOTING SECTION---------------------------------------------------------------->
+                <center><p><h3 style="color: rgb(255, 255, 255); background-color: #1E95DB; border-radius: 20px">USC CANDIDATES</h3></p></center>
+                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                    <div class="card-body" id = "USCBALLOT">
+                    </div>
+                </div>
+            <!----------------------------------------------------------------CSC VOTING SECTION---------------------------------------------------------------->
+            <center><p><h3 style="color: #ffffff; background-color: #FB6F19; border-radius: 20px">CSC CANDIDATES</h3></p></center>
+                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                    <div class="card-body" id="CSCBALLOT">
+                    </div>
+                </div>
+
+            <center><a href="#" class="btn btn-outline-primary block rounded-pill" data-bs-toggle="modal"
+                    id="verify">Verify Vote</a></center>
+
+                <button onclick="topFunction()" id="btnTop" style="width: 50px; height: 50px; z-index: 99; position: fixed; border-radius: 50px; bottom: 50px; right: 50px"><i class="bi bi-arrow-up" style="font-size: 35px"></i></button>
+                <!--Verify Modal-->
+                <div class="modal fade text-left" id="verifyModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h3 class="modal-title" style="color:#ffffff">VOTES VERIFICATION</h3>
+                            </div>
+                            <div class="modal-body">
+                                    <p id="verify"></p>
+                                    <div id="studName"></div>
+                                    <div id="studId"></div>
+                                    <div id="studEmail"></div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text">
+                                            <h4>Votes</h4>
                                         </div> 
-                                    </div> 
-                                </div>    
-                            </center>
-                        <!----------------------------------------------------------------USC VOTING SECTION---------------------------------------------------------------->
-                        <center><p><h3 style="color: rgb(255, 255, 255); background-color: #1E95DB; border-radius: 20px">USC CANDIDATES</h3></p></center>
-                            <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
-                                <div class="card-body" id = "USCBALLOT">
-                                </div>
-                            </div>
-                        <!----------------------------------------------------------------CSC VOTING SECTION---------------------------------------------------------------->
-                        <center><p><h3 style="color: #ffffff; background-color: #FB6F19; border-radius: 20px">CSC CANDIDATES</h3></p></center>
-                            <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
-                                <div class="card-body" id="CSCBALLOT">
-                                </div>
-                            </div>
-
-                        <center><a href="#" class="btn btn-outline-primary block rounded-pill" data-bs-toggle="modal"
-                                id="verify">Verify Vote</a></center>
-
-                            <button onclick="topFunction()" id="btnTop" style="width: 50px; height: 50px; z-index: 99; position: fixed; border-radius: 50px; bottom: 50px; right: 50px"><i class="bi bi-arrow-up" style="font-size: 35px"></i></button>
-                            <!--Verify Modal-->
-                            <div class="modal fade text-left" id="verifyModal" tabindex="-1" role="dialog"
-                                aria-labelledby="myModalLabel1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary">
-                                            <h3 class="modal-title" style="color:#ffffff">VOTES VERIFICATION</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                                <p id="verify"></p>
-                                                <div id="studName"></div>
-                                                <div id="studId"></div>
-                                                <div id="studEmail"></div>
-                                                <div class="divider divider-center">
-                                                    <div class="divider-text">
-                                                        <h4>Votes</h4>
-                                                    </div> 
-                                                </div>
-                                                <div class="divider divider-center">
-                                                    <div class="divider-text"><h6>For USC Positions</h6></div>
-                                                        <ul class="list-group" id="USCVOTES">
-                                                        </ul>
-                                                </div>
-                                                <div class="divider divider-center">
-                                                    <div class="divider-text"><h6>For CSC Positions</h6></div>
-                                                        <ul class="list-group" id="CSCVOTES">
-                                                        </ul>
-                                                </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary ml-1" data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Back</span>
-                                                </button>
-                                                <button  name="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="submitVotes">Submit
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table class="table table-striped" id="table1">
-                                        <thead>
-                                            <tr>
-                                                <th><center>Student ID</center></th>
-                                                <th><center>Time Voted</center></th>
-                                            </tr>
-                                        </thead>                       
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel"
-                        aria-labelledby="contact-tab">
-                        <p>
-                            <div class="modal-warning d-flex justify-content-center" style="padding-top: 25px">
-                                <!-- Button trigger for warning theme modal -->
-                                <button type="button" class="btn btn-outline-warning"
-                                    data-bs-toggle="modal" data-bs-target="#warning" style="color: black">
-                                    Log Out
-                                </button>
-                                <!--warning theme Modal -->
-                                <div class="modal fade text-left" id="warning" tabindex="-1"
-                                    role="dialog" aria-labelledby="myModalLabel140"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-warning">
-                                                <h4 class="modal-title white" id="myModalLabel140" style="color: black">
-                                                    Log Out?
-                                                </h4>
-                                                <button type="button" class="close"
-                                                    data-bs-dismiss="modal" aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>
-                                                    <center><h5>Are you sure you want to log out?</h5>
-                                                    <h7>All changes will be saved</h7></center>
-                                                </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button"
-                                                    class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Back</span>
-                                                </button>
-                                                <button type="button" class="btn btn-secondary ml-1" onclick="logout()">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Continue</span>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text"><h6>For USC Positions</h6></div>
+                                            <ul class="list-group" id="USCVOTES">
+                                            </ul>
                                     </div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text"><h6>For CSC Positions</h6></div>
+                                            <ul class="list-group" id="CSCVOTES">
+                                            </ul>
+                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary ml-1" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Back</span>
+                                    </button>
+                                    <button  name="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="submitVotes">Submit
+                                    </button>
                                 </div>
                             </div>
-                            <!----------------Logos------------------------>
-                            <footer>
-                            <div class="divider">
-                            <p>Brought to you by: </p>
-                            <center><img src="assets/images/logo/usc.png" style="width: 200px; height: 200px">
-                            <img src="assets/images/logo/csc.png" style="width: 180px; height: 100px">
-                            <img src="assets/images/logo/osas.png" style="width: 200px; height: 200px"></center></div>
-                            </footer>
                         </div>
-
+                    </div>
+                </div>
+                </div>
                     <script>
                     var btnTop = document.getElementById('btnTop');
                     window.onscroll = function(){
@@ -226,19 +112,14 @@
                             document.documentElement.scrollTop = 0;
                         }
                 </script>
-                <script src="assets/js/verify.js"></script>
-                <script src="assets/js/history.js"></script>
                 <script src="assets/js/jquery-3.6.0.min.js"></script>
                 <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-                <script src="assets/js/datatables.min.js"></script>
                 <script src="assets/js/bootstrap.bundle.min.js"></script>
                 <script src="assets/js/loadCandidates.js"></script>
                 <script src="assets/js/submitVerifyVotes.js"></script>
                 <script src="assets/js/sweetalert2/dist/sweetalert2.min.js"></script>
                 <script src="assets/js/jspdf.umd.min.js"></script>
                 <script src="assets/js/jspdf.plugin.autotable.js"></script>
-                <script type="text/javascript" src="assets/js/datatables.min.js"></script>
-                <script src="assets/js/historytable.js"></script>
 </body>
 
 </html>
