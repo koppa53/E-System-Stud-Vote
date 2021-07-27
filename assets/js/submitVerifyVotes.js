@@ -1,10 +1,3 @@
-
-window.onbeforeunload = confirmWinClose();
-function confirmWinClose() {
-    var confirmClose = confirm('Are you sure you want to refresh?');
-    return confirmClose;
-}
-
 $(document).ready(function () {
 
     let pos = new Array()
