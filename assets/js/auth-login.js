@@ -10,15 +10,27 @@ async function setCountdown() {
         }
     });
     const data = await response.json();
-    return data.data
+    return data
 }
 time.then(function (result) {
-    var d = new Date(result.period_date);
-    var s = result.period_start_time
-    var splitted = s.split(":")
-    d.setHours(splitted[0])
-    d.setMinutes(splitted[1])
-    initializeClock('clockdiv', d);
+    if (result.hasOwnProperty('data')) {
+        var d = new Date(result.data.period_date);
+        var s = result.data.period_start_time
+        document.getElementById("clockdiv").style.display = "block";
+        document.getElementById('sub').innerHTML = "Election Countdown Clock"
+        var splitted = s.split(":")
+        d.setHours(splitted[0])
+        d.setMinutes(splitted[1])
+        initializeClock('clockdiv', d);
+    } else {
+        if (result.message == "Election Started") {
+            document.getElementById('sub').innerHTML = result.message;
+            document.getElementById("EnterElection").style.display = "block";
+        }
+        else {
+            document.getElementById('sub').innerHTML = result.message;
+        }
+    }
     function getTimeRemaining(endtime) {
         const total = Date.parse(endtime) - Date.parse(new Date());
         const seconds = Math.floor((total / 1000) % 60);
@@ -57,6 +69,7 @@ time.then(function (result) {
         updateClock();
         const timeinterval = setInterval(updateClock, 1000);
     }
+
 })
 
 
