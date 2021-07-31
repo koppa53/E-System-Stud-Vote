@@ -17,7 +17,13 @@
     <script src="assets/js/check-auth.js"></script>
 </head>
 
-<body style="padding-top: 50px;">
+<body>
+    <header class="topbar">
+        <div class="container d-block">
+            <a class="navbar-brand ms-4" href="index.html">
+                <img src="assets/images/logo/votelogo.png">
+            </a>
+    </header>
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow p-3 mb-5 bg-white rounded ">
@@ -26,44 +32,53 @@
                         <div class="carousel-inner">
                             <!------------------------Header Carousel-------------------------------->
                             <center>
-                            <div class="carousel-item active">
-                                <img src="assets/images/logo/USC.png" style="width: 100px; height: 100px">
-                                <img src="assets/images/logo/bucarosel.png" style="width: 480px; height: 60px">
-                                <img src="assets/images/logo/OSAS.png" style="width: 90px; height: 90px">
-                            </div>
-                            <div class="carousel-item text-primary">
-                                <h2>VOTE WISELY!<h2>
-                            </div></center>
+                                <div class="carousel-item active">
+                                    <img src="assets/images/logo/USC.png" style="width: 100px; height: 100px">
+                                    <img src="assets/images/logo/BALLOT LOGO.png" style="width: 300px; height: 70px">
+                                    <img src="assets/images/logo/OSAS.png" style="width: 90px; height: 90px">
+                                </div>
+                                <div class="carousel-item text-primary">
+                                    <h2>VOTE WISELY!
+                                        <h2>
+                                </div>
+                            </center>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="card-body">
-                <!----------------------------------------------------------------USC VOTING SECTION---------------------------------------------------------------->
-                <center><p><h3 style="color: rgb(255, 255, 255); background-color: #1E95DB; border-radius: 20px">USC CANDIDATES</h3></p></center>
-                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
-                    <div class="card-body" id = "USCBALLOT">
+                    <!----------------------------------------------------------------USC VOTING SECTION---------------------------------------------------------------->
+                    <center>
+                        <p>
+                            <h3 style="color: rgb(255, 255, 255); background-color: #1E95DB; border-radius: 20px">USC CANDIDATES</h3>
+                        </p>
+                    </center>
+                    <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                        <div class="card-body" id="USCBALLOT">
+                        </div>
                     </div>
-                </div>
-            <!----------------------------------------------------------------CSC VOTING SECTION---------------------------------------------------------------->
-            <center><p><h3 style="color: #ffffff; background-color: #FB6F19; border-radius: 20px">CSC CANDIDATES</h3></p></center>
-                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
-                    <div class="card-body" id="CSCBALLOT">
+
+                    <!----------------------------------------------------------------CSC VOTING SECTION---------------------------------------------------------------->
+                    <center>
+                        <p>
+                            <h3 style="color: #ffffff; background-color: #FB6F19; border-radius: 20px">CSC CANDIDATES</h3>
+                        </p>
+                    </center>
+                    <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                        <div class="card-body" id="CSCBALLOT">
+                        </div>
                     </div>
-                </div>
 
-            <center><a href="#" class="btn btn-outline-primary block rounded-pill" data-bs-toggle="modal"
-                    id="verify">Verify Vote</a></center>
+                    <center><a href="#" class="btn btn-outline-primary block rounded-pill" data-bs-toggle="modal" id="verify">Verify Vote</a></center>
 
-                <button onclick="topFunction()" id="btnTop" style="width: 50px; height: 50px; z-index: 99; position: fixed; border-radius: 50px; bottom: 50px; right: 50px"><i class="bi bi-arrow-up" style="font-size: 35px"></i></button>
-                <!--Verify Modal-->
-                <div class="modal fade text-left" id="verifyModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary">
-                                <h3 class="modal-title" style="color:#ffffff">VOTES VERIFICATION</h3>
-                            </div>
-                            <div class="modal-body">
+                    <button onclick="topFunction()" id="btnTop" style="width: 50px; height: 50px; z-index: 99; position: fixed; border-radius: 50px; bottom: 50px; right: 50px"><i class="bi bi-arrow-up" style="font-size: 35px"></i></button>
+                    <!--Verify Modal-->
+                    <div class="modal fade text-left" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <h3 class="modal-title" style="color:#ffffff">VOTES VERIFICATION</h3>
+                                </div>
+                                <div class="modal-body">
                                     <p id="verify"></p>
                                     <div id="studName"></div>
                                     <div id="studId"></div>
@@ -71,46 +86,53 @@
                                     <div class="divider divider-center">
                                         <div class="divider-text">
                                             <h4>Votes</h4>
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="divider divider-center">
-                                        <div class="divider-text"><h6>For USC Positions</h6></div>
-                                            <ul class="list-group" id="USCVOTES">
-                                            </ul>
+                                        <div class="divider-text">
+                                            <h6>For USC Positions</h6>
+                                        </div>
+                                        <ul class="list-group" id="USCVOTES">
+                                        </ul>
                                     </div>
                                     <div class="divider divider-center">
-                                        <div class="divider-text"><h6>For CSC Positions</h6></div>
-                                            <ul class="list-group" id="CSCVOTES">
-                                            </ul>
+                                        <div class="divider-text">
+                                            <h6>For CSC Positions</h6>
+                                        </div>
+                                        <ul class="list-group" id="CSCVOTES">
+                                        </ul>
                                     </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-secondary ml-1" data-bs-dismiss="modal">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-secondary ml-1" data-bs-dismiss="modal">
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Back</span>
                                     </button>
-                                    <button  name="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="submitVotes">Submit
+                                        <button name="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="submitVotes">Submit
                                     </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                    <script>
+                <script>
                     var btnTop = document.getElementById('btnTop');
-                    window.onscroll = function(){
-                        scrollFunction()};
-                        function scrollFunction(){
-                            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
-                                btnTop.style.display = "block";
-                            }else{
-                                btnTop.style.display = "none";
-                            }
+                    window.onscroll = function() {
+                        scrollFunction()
+                    };
+
+                    function scrollFunction() {
+                        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                            btnTop.style.display = "block";
+                        } else {
+                            btnTop.style.display = "none";
                         }
-                        function topFunction(){
-                            document.body.scrollTop = 0;
-                            document.documentElement.scrollTop = 0;
-                        }
+                    }
+
+                    function topFunction() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    }
                 </script>
                 <script src="assets/js/jquery-3.6.0.min.js"></script>
                 <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

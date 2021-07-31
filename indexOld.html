@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> BU - USC|CSC Election</title>
+    <link rel="shortcut icon" href="assets/images/logo/bu.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/check-auth.js"></script>
+</head>
+
+<body style="padding-top: 50px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow p-3 mb-5 bg-white rounded ">
+                <div class="card-header">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!------------------------Header Carousel-------------------------------->
+                            <center>
+                            <div class="carousel-item active">
+                                <img src="assets/images/logo/USC.png" style="width: 100px; height: 100px">
+                                <img src="assets/images/logo/bucarosel.png" style="width: 480px; height: 60px">
+                                <img src="assets/images/logo/OSAS.png" style="width: 90px; height: 90px">
+                            </div>
+                            <div class="carousel-item text-primary">
+                                <h2>VOTE WISELY!<h2>
+                            </div></center>
+                        </div>
+                    </div> 
+                </div>
+                <div class="card-body">
+                <!----------------------------------------------------------------USC VOTING SECTION---------------------------------------------------------------->
+                <center><p><h3 style="color: rgb(255, 255, 255); background-color: #1E95DB; border-radius: 20px">USC CANDIDATES</h3></p></center>
+                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                    <div class="card-body" id = "USCBALLOT">
+                    </div>
+                </div>
+            <!----------------------------------------------------------------CSC VOTING SECTION---------------------------------------------------------------->
+            <center><p><h3 style="color: #ffffff; background-color: #FB6F19; border-radius: 20px">CSC CANDIDATES</h3></p></center>
+                <div class=" col-xl-12" class="col-form-label justify-content-center align-items-center align-content-center align-self-center">
+                    <div class="card-body" id="CSCBALLOT">
+                    </div>
+                </div>
+
+            <center><a href="#" class="btn btn-outline-primary block rounded-pill" data-bs-toggle="modal"
+                    id="verify">Verify Vote</a></center>
+
+                <button onclick="topFunction()" id="btnTop" style="width: 50px; height: 50px; z-index: 99; position: fixed; border-radius: 50px; bottom: 50px; right: 50px"><i class="bi bi-arrow-up" style="font-size: 35px"></i></button>
+                <!--Verify Modal-->
+                <div class="modal fade text-left" id="verifyModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h3 class="modal-title" style="color:#ffffff">VOTES VERIFICATION</h3>
+                            </div>
+                            <div class="modal-body">
+                                    <p id="verify"></p>
+                                    <div id="studName"></div>
+                                    <div id="studId"></div>
+                                    <div id="studEmail"></div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text">
+                                            <h4>Votes</h4>
+                                        </div> 
+                                    </div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text"><h6>For USC Positions</h6></div>
+                                            <ul class="list-group" id="USCVOTES">
+                                            </ul>
+                                    </div>
+                                    <div class="divider divider-center">
+                                        <div class="divider-text"><h6>For CSC Positions</h6></div>
+                                            <ul class="list-group" id="CSCVOTES">
+                                            </ul>
+                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary ml-1" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Back</span>
+                                    </button>
+                                    <button  name="button" class="btn btn-outline-success" data-bs-dismiss="modal" id="submitVotes">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    <script>
+                    var btnTop = document.getElementById('btnTop');
+                    window.onscroll = function(){
+                        scrollFunction()};
+                        function scrollFunction(){
+                            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
+                                btnTop.style.display = "block";
+                            }else{
+                                btnTop.style.display = "none";
+                            }
+                        }
+                        function topFunction(){
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
+                        }
+                </script>
+                <script src="assets/js/jquery-3.6.0.min.js"></script>
+                <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+                <script src="assets/js/bootstrap.bundle.min.js"></script>
+                <script src="assets/js/loadCandidates.js"></script>
+                <script src="assets/js/submitVerifyVotes.js"></script>
+                <script src="assets/js/sweetalert2/dist/sweetalert2.min.js"></script>
+                <script src="assets/js/jspdf.umd.min.js"></script>
+                <script src="assets/js/jspdf.plugin.autotable.js"></script>
+</body>
+
+</html>
