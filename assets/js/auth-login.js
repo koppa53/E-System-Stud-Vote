@@ -13,10 +13,10 @@ async function setCountdown() {
     return data
 }
 time.then(function (result) {
+
     if (result.hasOwnProperty('data')) {
         var d = new Date(result.data.period_date);
         var s = result.data.period_start_time
-        document.getElementById("clockdiv").style.display = "block";
         document.getElementById('sub').innerHTML = "Election Countdown Clock"
         var splitted = s.split(":")
         d.setHours(splitted[0])
@@ -55,14 +55,21 @@ time.then(function (result) {
 
         function updateClock() {
             const t = getTimeRemaining(endtime);
-
-            daysSpan.innerHTML = t.days;
-            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-            if (t.total <= 0) {
-                clearInterval(timeinterval);
+            if (Math.sign(t.days) != -1 || Math.sign(t.hours) != -1 || Math.sign(t.minutes) != -1 ||
+                Math.sign(t.seconds) != -1) {
+                document.getElementById("clockdiv").style.display = "block";
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                    document.getElementById('sub').innerHTML = "Election Started";
+                    document.getElementById("clockdiv").style.display = "none";
+                    document.getElementById("EnterElection").style.display = "block";
+                }
+            } else {
+                document.getElementById('sub').innerHTML = "Election Ended";
             }
         }
 
@@ -108,9 +115,28 @@ $('#verifyID').on("submit", async (event) => {
                 allowOutsideClick: false,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Enter'
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "index.html"
+                    const response = await fetch('http://localhost:5000/is_on_election_time', {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    const data = await response.json();
+                    if (data.message == "Election Started") {
+                        window.location.href = "index.html"
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Election Ended",
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Reload'
+                        }).then(() => {
+                            location.reload();
+                        })
+                    }
                 }
             })
         } else {
