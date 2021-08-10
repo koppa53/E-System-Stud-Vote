@@ -1,6 +1,6 @@
 
 function checkAuth() {
-    if (sessionStorage.hasOwnProperty('User ID') && sessionStorage.hasOwnProperty('College')) {
+    if (sessionStorage.hasOwnProperty('User ID') && sessionStorage.hasOwnProperty('College') && sessionStorage.hasOwnProperty('Token')) {
     } else {
         window.location.href = "auth-login.html"
     }

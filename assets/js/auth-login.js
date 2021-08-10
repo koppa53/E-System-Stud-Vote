@@ -99,7 +99,7 @@ $('#verifyID').on("submit", async (event) => {
         })
 
     } else {
-        const response = await fetch('http://localhost:5000/student_has_voted/' + id, {
+        const response = await fetch('http://localhost:5000/student_vote_login/' + id, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -109,6 +109,7 @@ $('#verifyID').on("submit", async (event) => {
         if (response.ok) {
             sessionStorage.setItem("User ID", id)
             sessionStorage.setItem("College", college)
+            sessionStorage.setItem("Token", data.token)
             Swal.fire({
                 icon: "success",
                 title: "ID verified you may now vote.",
