@@ -52,6 +52,9 @@ time.then(function (result) {
         const hoursSpan = clock.querySelector('.hours');
         const minutesSpan = clock.querySelector('.minutes');
         const secondsSpan = clock.querySelector('.seconds');
+        const timeinterval = setInterval(updateClock, 1000);
+
+        updateClock();
 
         function updateClock() {
             const t = getTimeRemaining(endtime);
@@ -70,11 +73,9 @@ time.then(function (result) {
                 }
             } else {
                 document.getElementById('sub').innerHTML = "Election Ended";
+                clearInterval(timeinterval);
             }
         }
-
-        updateClock();
-        const timeinterval = setInterval(updateClock, 1000);
     }
 
 })
