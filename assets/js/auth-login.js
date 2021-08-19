@@ -127,6 +127,9 @@ $('#verifyID').on("submit", async (event) => {
                     });
                     const data = await response.json();
                     if (data.message == "Election Started") {
+                        var date = new Date()
+                        date = date.toLocaleString()
+                        sessionStorage.setItem("Time Entered", date)
                         window.location.href = "index.html"
                     } else {
                         Swal.fire({

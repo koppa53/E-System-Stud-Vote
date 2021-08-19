@@ -148,89 +148,115 @@ $(document).ready(function () {
             } else {
                 Swal.fire({
                     icon: "error",
-                    title: "Invalid Votes.",
-                    text: `Please Check The Required Number of Candidates in every Positions.`
+                    title: "Invalid Votes",
+                    text: `Please Check Your Selected Candidates.`
                 })
             }
         }
     })
 
     var id = sessionStorage.getItem("User ID")
+    const timeEntered = sessionStorage.getItem("Time Entered")
     var college = sessionStorage.getItem("College")
     $('#submitVotes').on('click', async (event) => {
         event.preventDefault()
-        let success = false
-        for (const v of allUSCVotes) {
-            let split = v.split('_')
-            const response = await fetch('http://localhost:5000/new_student_vote', {
-                method: "POST",
-                headers: {
-                    "authorization": tok,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    vote_student_id: id,
-                    vote_election_year: split[5],
-                    vote_candidate_first_name: split[0],
-                    vote_candidate_last_name: split[1],
-                    vote_candidate_id: split[3],
-                    vote_college: college,
-                    vote_candidate_position: split[2],
-                    vote_council: split[4]
-                })
-            })
-            if (response.ok) {
-                success = true
-            } else {
-                success = false
-            }
-        }
-        for (const v of allCSCVotes) {
-            let split = v.split('_')
-            const response = await fetch('http://localhost:5000/new_student_vote', {
-                method: "POST",
-                headers: {
-                    "authorization": tok,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    vote_student_id: id,
-                    vote_election_year: split[5],
-                    vote_candidate_first_name: split[0],
-                    vote_candidate_last_name: split[1],
-                    vote_candidate_id: split[3],
-                    vote_college: college,
-                    vote_candidate_position: split[2],
-                    vote_council: split[4]
-                })
-            })
-            if (response.ok) {
-                success = true
-            } else {
-                success = false
-            }
-        }
-        if (success) {
-            generateReciept()
-            Swal.fire({
-                icon: "success",
-                title: "Votes Successfully Submitted",
-                allowOutsideClick: false,
-                text: "Thank You For Voting.",
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Done'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    sessionStorage.clear();
-                    window.location.href = "auth-login.html"
+        Swal.fire({
+            title: 'Enter your Student ID to confirm submission of votes.',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: (cid) => {
+                if (cid == id) {
+                    return 1
                 }
-            })
-        } else {
-            Swal.fire({
-                icon: "error",
-                title: "Failed to submit Votes."
-            })
-        }
+                else {
+                    Swal.showValidationMessage(
+                        `Your Student ID does not match.`
+                    )
+                }
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let success = false
+                for (const v of allUSCVotes) {
+                    let split = v.split('_')
+                    const response = await fetch('http://localhost:5000/new_student_vote', {
+                        method: "POST",
+                        headers: {
+                            "authorization": tok,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            vote_student_id: id,
+                            vote_election_year: split[5],
+                            vote_candidate_first_name: split[0],
+                            vote_candidate_last_name: split[1],
+                            vote_candidate_id: split[3],
+                            vote_college: college,
+                            vote_candidate_position: split[2],
+                            vote_council: split[4],
+                            time_entered: timeEntered
+                        })
+                    })
+                    if (response.ok) {
+                        success = true
+                    } else {
+                        success = false
+                    }
+                }
+                for (const v of allCSCVotes) {
+                    let split = v.split('_')
+                    const response = await fetch('http://localhost:5000/new_student_vote', {
+                        method: "POST",
+                        headers: {
+                            "authorization": tok,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            vote_student_id: id,
+                            vote_election_year: split[5],
+                            vote_candidate_first_name: split[0],
+                            vote_candidate_last_name: split[1],
+                            vote_candidate_id: split[3],
+                            vote_college: college,
+                            vote_candidate_position: split[2],
+                            vote_council: split[4],
+                            time_entered: timeEntered
+                        })
+                    })
+                    if (response.ok) {
+                        success = true
+                    } else {
+                        success = false
+                    }
+                }
+                if (success) {
+                    generateReciept()
+                    Swal.fire({
+                        icon: "success",
+                        title: "Votes Successfully Submitted",
+                        allowOutsideClick: false,
+                        text: "Thank You For Voting.",
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Done'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            sessionStorage.clear();
+                            window.location.href = "auth-login.html"
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Failed to submit Votes."
+                    })
+                }
+            }
+        })
     })
 
     function generateReciept() {
